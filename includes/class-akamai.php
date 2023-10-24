@@ -370,7 +370,7 @@ class Akamai {
 			?>
 			<div class="error notice is-dismissible">
 				<p>
-					<img src="<?php echo Akamai_Admin::get_icon(); ?>" style="height: 1em" alt="Akamai for WordPress">
+					<img src="<?php echo esc_attr( Akamai_Admin::get_icon() ); ?>" style="height: 1em" alt="Akamai for WordPress">
 					<?php
 					/* translators: 1. An error message. */
 					printf( esc_html__( 'Unable to purge cache: %s', 'akamai' ), $error );
