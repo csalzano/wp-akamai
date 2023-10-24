@@ -28,7 +28,9 @@
 // If this file is called directly, abort.
 defined( 'ABSPATH' ) || exit;
 
-define( 'AKAMAI_MIN_PHP', '5.3' );
+if ( ! defined( 'AKAMAI_MIN_PHP' ) ) {
+	define( 'AKAMAI_MIN_PHP', '5.3' );
+}
 
 if ( version_compare( phpversion(), AKAMAI_MIN_PHP, '<' ) ) {
 	add_action( 'admin_notices', function () {
@@ -43,55 +45,59 @@ if ( version_compare( phpversion(), AKAMAI_MIN_PHP, '<' ) ) {
 	return false;
 }
 
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication.php';
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Timestamp.php';
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Nonce.php';
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception.php';
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception/ConfigException.php';
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception/SignerException.php';
-require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception/SignerException/InvalidSignDataException.php';
-
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-akamai-activator.php
- */
-function activate_akamai() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-akamai-activator.php';
-	Akamai_Activator::activate();
+if ( ! function_exists( 'activate_akamai' ) ) {
+	/**
+	 * The code that runs during plugin activation.
+	 * This action is documented in includes/class-akamai-activator.php
+	 */
+	function activate_akamai() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-akamai-activator.php';
+		Akamai_Activator::activate();
+	}
+	register_activation_hook( __FILE__, 'activate_akamai');
 }
 
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-akamai-deactivator.php
- */
-function deactivate_akamai() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-akamai-deactivator.php';
-	Akamai_Deactivator::deactivate();
+if ( ! function_exists( 'deactivate_akamai' ) ) {
+	/**
+	 * The code that runs during plugin deactivation.
+	 * This action is documented in includes/class-akamai-deactivator.php
+	 */
+	function deactivate_akamai() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-akamai-deactivator.php';
+		Akamai_Deactivator::deactivate();
+	}
+	register_deactivation_hook( __FILE__, 'deactivate_akamai');
 }
 
-register_activation_hook( __FILE__, 'activate_akamai');
-register_deactivation_hook( __FILE__, 'deactivate_akamai');
+if ( ! function_exists( 'run_akamai' ) ) {
 
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-akamai.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Timestamp.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Nonce.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception/ConfigException.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception/SignerException.php';
+	require_once 'vendor/akamai-open/edgegrid-auth/src/Authentication/Exception/SignerException/InvalidSignDataException.php';
+	/**
+	 * The core plugin class that is used to define internationalization,
+	 * admin-specific hooks, and public-facing site hooks.
+	 */
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-akamai.php';
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    0.1.0
- */
-function run_akamai() {
+	/**
+	 * Begins execution of the plugin.
+	 *
+	 * Since everything within the plugin is registered via hooks,
+	 * then kicking off the plugin from this point in the file does
+	 * not affect the page life cycle.
+	 *
+	 * @since    0.1.0
+	 */
+	function run_akamai() {
 
-	$plugin = new Akamai();
-	$plugin->run();
+		$plugin = new Akamai();
+		$plugin->run();
 
+	}
+	run_akamai();
 }
-
-run_akamai();
