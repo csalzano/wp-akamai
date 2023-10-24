@@ -24,7 +24,7 @@ This plugin is developed on [GitHub](https://github.com/akamai/wp-akamai). Issue
 
 1. Upload the plugin directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Find 'Akamai for WP' in the dashboard menu and configure the plugin's settings
+1. Find 'Akamai' in the dashboard menu and configure the plugin's settings
 
 = How to Obtain Credentials =
 

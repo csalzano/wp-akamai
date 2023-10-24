@@ -112,7 +112,7 @@ class Akamai_Admin {
 		 */
 		add_menu_page(
 			'Akamai for WordPress',
-			'Akamai for WP',
+			'Akamai',
 			'manage_options',
 			$this->plugin_name,
 			array( $this, 'display_plugin_setup_page' ),
