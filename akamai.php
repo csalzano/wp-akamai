@@ -26,9 +26,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+defined( 'ABSPATH' ) || exit;
 
 define( 'AKAMAI_MIN_PHP', '5.3' );
 

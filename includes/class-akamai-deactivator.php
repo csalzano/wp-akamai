@@ -10,6 +10,8 @@
  * @subpackage Akamai/includes
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Fired during plugin deactivation.
  *
