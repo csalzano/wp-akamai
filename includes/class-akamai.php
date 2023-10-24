@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -100,15 +99,14 @@ class Akamai {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-akamai-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-akamai-loader.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-akamai-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-akamai-admin.php';
 
 		$this->loader = new Akamai_Loader();
-
 	}
 
 	/**
@@ -126,18 +124,17 @@ class Akamai {
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
 
-
-		// Add Settings link to the plugin
+		// Add Settings link to the plugin.
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 		$this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
 
-		// Save/Update our plugin options
+		// Save/Update our plugin options.
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'options_update' );
 
-		// Validate Credentials AJAX
+		// Validate Credentials AJAX.
 		$this->loader->add_action( 'wp_ajax_akamai_verify_credentials', $plugin_admin, 'verify_credentials' );
 
-		// Purging Actions/Hooks
+		// Purging Actions/Hooks.
 		$this->loader->add_action( 'save_post', $this, 'purgeOnPost' );
 		$this->loader->add_action( 'wp_trash_post', $this, 'purgeOnPost' );
 		$this->loader->add_action( 'comment_post', $this, 'purgeOnComment', 10, 3 );
@@ -191,9 +188,9 @@ class Akamai {
 	 *
 	 * @return bool
 	 */
-	public function purgeOnPost($post_ID ) {
+	public function purgeOnPost( $post_ID ) {
 		$post = get_post( $post_ID );
-		if ( ! is_object( $post ) || $post->post_status != 'publish' ) {
+		if ( ! is_object( $post ) || $post->post_status !== 'publish' ) {
 			return true;
 		}
 
@@ -201,33 +198,31 @@ class Akamai {
 
 		$options['purge_front'] = true;
 
-		$this->purge($options, $post);
+		$this->purge( $options, $post );
 	}
 
-	public function purgeOnComment($comment_ID, $comment_approved, $comment_data) {
-		if ($comment_approved == 1) {
+	public function purgeOnComment( $comment_ID, $comment_approved, $comment_data ) {
+		if ( $comment_approved === 1 ) {
 			$options = get_option( $this->plugin_name );
 
 			if ( ! empty( $options['purge_comments'] ) && $options['purge_comments'] ) {
-				$post = get_post($comment_data['comment_post_ID']);
-				$this->purge($options, $post);
+				$post = get_post( $comment_data['comment_post_ID'] );
+				$this->purge( $options, $post );
 			}
 		}
 	}
 
-	public function purgeOnCommentStatus($new_status, $old_status, $comment) {
-		if($old_status != $new_status) {
+	public function purgeOnCommentStatus( $new_status, $old_status, $comment ) {
+		if ( $old_status !== $new_status ) {
 			$options = get_option( $this->plugin_name );
 			if ( ! empty( $options['purge_comments'] ) && $options['purge_comments'] ) {
-				$post = get_post($comment->comment_post_ID);
-				$this->purge($options, $post);
+				$post = get_post( $comment->comment_post_ID );
+				$this->purge( $options, $post );
 			}
 		}
 	}
 
-	public function sendHeaders($WP)
-	{
-
+	public function sendHeaders( $WP ) {
 	}
 
 	/**
@@ -237,7 +232,7 @@ class Akamai {
 	 * @return mixed|string|void
 	 */
 	protected function get_purge_body( $options, $post ) {
-		$baseUrl   = parse_url( get_bloginfo( 'wpurl' ), PHP_URL_PATH ) . '/';
+		$baseUrl   = wp_parse_url( get_bloginfo( 'wpurl' ), PHP_URL_PATH ) . '/';
 		$permalink = get_permalink( $post->ID );
 
 		$objects = array(
@@ -248,7 +243,7 @@ class Akamai {
 			$objects[] = $baseUrl;
 		}
 
-		$host = $this->get_hostname($options);
+		$host = $this->get_hostname( $options );
 
 		if ( ! empty( $options['purge_tags'] ) && $options['purge_tags'] ) {
 			$tags = get_the_tags( $post->ID );
@@ -278,10 +273,10 @@ class Akamai {
 
 		$data = array(
 			'hostname' => $host,
-			'objects'  => $objects
+			'objects'  => $objects,
 		);
 
-		return json_encode( $data );
+		return wp_json_encode( $data );
 	}
 
 	/**
@@ -290,9 +285,9 @@ class Akamai {
 	 * @return mixed|string
 	 */
 	protected function get_item_url( $url ) {
-		$itemUrl = parse_url( $url, PHP_URL_PATH );
+		$itemUrl = wp_parse_url( $url, PHP_URL_PATH );
 		if ( strpos( $url, '?' ) !== false ) {
-			$itemUrl .= '?' . parse_url( $url, PHP_URL_QUERY );
+			$itemUrl .= '?' . wp_parse_url( $url, PHP_URL_QUERY );
 		}
 
 		return $itemUrl;
@@ -301,42 +296,41 @@ class Akamai {
 	/**
 	 * @return string
 	 */
-	public function get_hostname($options) {
-		if (isset($options['hostname'])) {
+	public function get_hostname( $options ) {
+		if ( isset( $options['hostname'] ) ) {
 			return $options['hostname'];
 		}
 
-		$wpurl = parse_url( get_bloginfo( 'wpurl' ) );
+		$wpurl = wp_parse_url( get_bloginfo( 'wpurl' ) );
 		$host  = $wpurl['host'];
 
 		return $host;
 	}
 
 	/**
-	 * @param array $options
+	 * @param array  $options
 	 * @param string $body
 	 *
 	 * @return \Akamai\Open\EdgeGrid\Authentication
 	 */
 	protected function get_purge_auth( $options, $body ) {
-	    try {
-		    $auth = \Akamai\Open\EdgeGrid\Authentication::createFromEdgeRcFile( $options['section'] ?? '', $options['edgerc'] ?? '' );
-		    $auth->setHttpMethod( 'POST' );
-		    $auth->setPath( '/ccu/v3/invalidate/url' );
-		    $auth->setBody( $body );
+		try {
+			$auth = \Akamai\Open\EdgeGrid\Authentication::createFromEdgeRcFile( $options['section'] ?? '', $options['edgerc'] ?? '' );
+			$auth->setHttpMethod( 'POST' );
+			$auth->setPath( '/ccu/v3/invalidate/url' );
+			$auth->setBody( $body );
 
-		    return $auth;
-	    } catch (\Exception $e) {
-	        return false;
-        }
+			return $auth;
+		} catch ( \Exception $e ) {
+			return false;
+		}
 	}
 
 	/**
 	 * @return string
 	 */
 	protected function get_user_agent() {
-		return
-			'WordPress/' . get_bloginfo( 'version' ) . ' ' .
+		return 'WordPress/' . get_bloginfo( 'version' ) . ' ' .
 			'Akamai-for-WordPress/' . self::VERSION . ' ' .
 			'PHP/' . phpversion();
 	}
@@ -350,7 +344,7 @@ class Akamai {
 	public function add_error_query_arg( $location, $response ) {
 		remove_filter( 'redirect_post_location', array( $this, 'add_error_query_arg' ), 100 );
 
-		return add_query_arg( array( 'akamai-cache-purge-error' => urlencode( $response->detail ) ), $location );
+		return add_query_arg( array( 'akamai-cache-purge-error' => rawurlencode( $response->detail ) ), $location );
 	}
 
 	/**
@@ -369,7 +363,7 @@ class Akamai {
 			?>
 			<div class="error notice is-dismissible">
 				<p>
-					<img src="<?= Akamai_Admin::get_icon(); ?>" style="height: 1em" alt="Akamai for WordPress">
+					<img src="<?php echo Akamai_Admin::get_icon(); ?>" style="height: 1em" alt="Akamai for WordPress">
 					<?php esc_html_e( 'Unable to purge cache: ' . $_GET['akamai-cache-purge-error'], 'akamai' ); ?>
 				</p>
 			</div>
@@ -381,34 +375,40 @@ class Akamai {
 	 * @param $options
 	 * @param $post
 	 */
-	protected function purge($options, $post)
-	{
-		$body = $this->get_purge_body($options, $post);
-		$auth = $this->get_purge_auth($options, $body);
+	protected function purge( $options, $post ) {
+		$body = $this->get_purge_body( $options, $post );
+		$auth = $this->get_purge_auth( $options, $body );
 
-		if (!($auth instanceof \Akamai\Open\EdgeGrid\Authentication)) {
-		    return;
+		if ( ! ( $auth instanceof \Akamai\Open\EdgeGrid\Authentication ) ) {
+			return;
 		}
 
-		$response = wp_remote_post('https://' . $auth->getHost() . $auth->getPath(), array(
-			'user-agent' => $this->get_user_agent(),
-			'headers' => array(
-				'Authorization' => $auth->createAuthHeader(),
-				'Content-Type' => 'application/json',
-				'Expect' => '',
-			),
-			'body' => $body
-		));
+		$response = wp_remote_post(
+			'https://' . $auth->getHost() . $auth->getPath(),
+			array(
+				'user-agent' => $this->get_user_agent(),
+				'headers'    => array(
+					'Authorization' => $auth->createAuthHeader(),
+					'Content-Type'  => 'application/json',
+					'Expect'        => '',
+				),
+				'body'       => $body,
+			)
+		);
 
-		if (wp_remote_retrieve_response_code($response) != 201) {
+		if ( wp_remote_retrieve_response_code( $response ) !== 201 ) {
 			$instance = $this;
-			add_filter('redirect_post_location', function ($location) use ($instance, $response) {
-				$body = json_decode(wp_remote_retrieve_body($response));
+			add_filter(
+				'redirect_post_location',
+				function ( $location ) use ( $instance, $response ) {
+					$body = json_decode( wp_remote_retrieve_body( $response ) );
 
-				return $instance->add_error_query_arg($location, $body);
-			}, 100);
+					return $instance->add_error_query_arg( $location, $body );
+				},
+				100
+			);
 		} else {
-			add_filter('redirect_post_location', array($this, 'add_success_query_arg'), 100);
+			add_filter( 'redirect_post_location', array( $this, 'add_success_query_arg' ), 100 );
 		}
 	}
 }

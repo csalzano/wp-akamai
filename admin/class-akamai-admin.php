@@ -53,7 +53,6 @@ class Akamai_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -95,13 +94,12 @@ class Akamai_Admin {
 	 */
 	public function add_plugin_admin_menu() {
 
-		/*
+		/**
 		 * Add a top-level menu
 		 *
 		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
 		 *
 		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
 		 */
 		add_menu_page(
 			'Akamai for WordPress',
@@ -113,23 +111,23 @@ class Akamai_Admin {
 		);
 	}
 
-	static public function get_icon() {
+	public static function get_icon() {
 		return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3' .
-		       'LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcHJlc2VydmVBc3BlY3RSYXRp' .
-		       'bz0ieE1pZFlNaWQiPg0KICA8Zz4NCiAgIDxwYXRoIGQ9Im0xMC44NTM2NiwxOS4zNzI1OWMtNC4wMzI2MiwtMS4yMzU5NyAtNi45' .
-		       'NTQ5NCwtNC45NTQzNSAtNi45NTQ5NCwtOS4zMzI2MWMwLC00LjQ1MTU4IDIuOTk1NjUsLTguMTkwOTIgNy4wOTExMSwtOS40MDU5' .
-		       'M2MwLjQxODk3LC0wLjExNTIyIDAuMzAzNzYsLTAuMzk4MDMgLTAuMTk5MDEsLTAuMzk4MDNjLTUuNDM2MTcsMCAtOS44NjY4LDQu' .
-		       'Mzc4MjYgLTkuODY2OCw5Ljc3MjU0YzAsNS4zOTQyNyA0LjM5OTIxLDkuNzcyNTQgOS44NjY4LDkuNzcyNTRjMC41MDI3NywwLjAz' .
-		       'MTQyIDAuNTIzNzIsLTAuMjUxMzkgMC4wNjI4NSwtMC40MDg1bDAsMGwwLC0wLjAwMDAxem0tNS4wODAwNCwtNy4wNzAxNmMtMC4w' .
-		       'MjA5NSwtMC4yNjE4NiAtMC4wNDE5LC0wLjUyMzcyIC0wLjA0MTksLTAuNzk2MDVjMCwtNC4yOTQ0NyAzLjQ3NzQ3LC03Ljc3MTk1' .
-		       'IDcuNzcxOTQsLTcuNzcxOTVjNC4wNTM1NiwwIDUuMjg5NTMsMS44MDE1OSA1LjQxNTIyLDEuNjk2ODRjMC4xNTcxMiwtMC4xMzYx' .
-		       'NyAtMS40NzY4NywtMy43MTgzOCAtNi4yMzIyMSwtMy43MTgzOGMtNC4yOTQ0NywwIC03Ljc3MTk1LDMuNDc3NDcgLTcuNzcxOTUs' .
-		       'Ny43NzE5NGMwLDAuOTk1MDYgMC4xOTkwMSwxLjkzNzc1IDAuNTIzNzIsMi44MTc2YzAuMTM2MTcsMC4zNzcwOCAwLjM1NjEyLDAu' .
-		       'Mzc3MDggMC4zMzUxNywwbDAuMDAwMDEsMC4wMDAwMXptMy4yMzY1NywtNS41OTMyOGMyLjAwMDU5LC0wLjg3OTg0IDQuNTU2MzMs' .
-		       'LTAuOTAwOCA3LjA0OTIyLC0wLjA0MTljMS42NzU4OSwwLjU5NzA0IDIuNjM5NTMsMS40MTQwNCAyLjczMzc5LDEuMzgyNjFjMC4x' .
-		       'MzYxNywtMC4wNjI4NSAtMC45NzQxMSwtMS44MDE1OCAtMi45NzQ3LC0yLjU1NTc0Yy0yLjQxOTU4LC0wLjkwMDggLTUuMDE3Miwt' .
-		       'MC40Mzk5MiAtNi45MTMwNSwxLjA1NzkxYy0wLjIwOTQ4LDAuMTU3MTIgLTAuMTQ2NjUsMC4yNzIzMyAwLjEwNDc0LDAuMTU3MTJs' .
-		       'MCwweiIgZmlsbD0iIzAwOThDQyIvPg0KICA8L2c+DQo8L3N2Zz4=';
+				'LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcHJlc2VydmVBc3BlY3RSYXRp' .
+				'bz0ieE1pZFlNaWQiPg0KICA8Zz4NCiAgIDxwYXRoIGQ9Im0xMC44NTM2NiwxOS4zNzI1OWMtNC4wMzI2MiwtMS4yMzU5NyAtNi45' .
+				'NTQ5NCwtNC45NTQzNSAtNi45NTQ5NCwtOS4zMzI2MWMwLC00LjQ1MTU4IDIuOTk1NjUsLTguMTkwOTIgNy4wOTExMSwtOS40MDU5' .
+				'M2MwLjQxODk3LC0wLjExNTIyIDAuMzAzNzYsLTAuMzk4MDMgLTAuMTk5MDEsLTAuMzk4MDNjLTUuNDM2MTcsMCAtOS44NjY4LDQu' .
+				'Mzc4MjYgLTkuODY2OCw5Ljc3MjU0YzAsNS4zOTQyNyA0LjM5OTIxLDkuNzcyNTQgOS44NjY4LDkuNzcyNTRjMC41MDI3NywwLjAz' .
+				'MTQyIDAuNTIzNzIsLTAuMjUxMzkgMC4wNjI4NSwtMC40MDg1bDAsMGwwLC0wLjAwMDAxem0tNS4wODAwNCwtNy4wNzAxNmMtMC4w' .
+				'MjA5NSwtMC4yNjE4NiAtMC4wNDE5LC0wLjUyMzcyIC0wLjA0MTksLTAuNzk2MDVjMCwtNC4yOTQ0NyAzLjQ3NzQ3LC03Ljc3MTk1' .
+				'IDcuNzcxOTQsLTcuNzcxOTVjNC4wNTM1NiwwIDUuMjg5NTMsMS44MDE1OSA1LjQxNTIyLDEuNjk2ODRjMC4xNTcxMiwtMC4xMzYx' .
+				'NyAtMS40NzY4NywtMy43MTgzOCAtNi4yMzIyMSwtMy43MTgzOGMtNC4yOTQ0NywwIC03Ljc3MTk1LDMuNDc3NDcgLTcuNzcxOTUs' .
+				'Ny43NzE5NGMwLDAuOTk1MDYgMC4xOTkwMSwxLjkzNzc1IDAuNTIzNzIsMi44MTc2YzAuMTM2MTcsMC4zNzcwOCAwLjM1NjEyLDAu' .
+				'Mzc3MDggMC4zMzUxNywwbDAuMDAwMDEsMC4wMDAwMXptMy4yMzY1NywtNS41OTMyOGMyLjAwMDU5LC0wLjg3OTg0IDQuNTU2MzMs' .
+				'LTAuOTAwOCA3LjA0OTIyLC0wLjA0MTljMS42NzU4OSwwLjU5NzA0IDIuNjM5NTMsMS40MTQwNCAyLjczMzc5LDEuMzgyNjFjMC4x' .
+				'MzYxNywtMC4wNjI4NSAtMC45NzQxMSwtMS44MDE1OCAtMi45NzQ3LC0yLjU1NTc0Yy0yLjQxOTU4LC0wLjkwMDggLTUuMDE3Miwt' .
+				'MC40Mzk5MiAtNi45MTMwNSwxLjA1NzkxYy0wLjIwOTQ4LDAuMTU3MTIgLTAuMTQ2NjUsMC4yNzIzMyAwLjEwNDc0LDAuMTU3MTJs' .
+				'MCwweiIgZmlsbD0iIzAwOThDQyIvPg0KICA8L2c+DQo8L3N2Zz4=';
 	}
 
 	/**
@@ -137,7 +135,6 @@ class Akamai_Admin {
 	 *
 	 * @since    0.1.0
 	 */
-
 	public function add_action_links( $links ) {
 		/*
 		*  Documentation : https://codex.wordpress.org/Plugin_API/Filter_Reference/plugin_action_links_(plugin_file_name)
@@ -147,7 +144,7 @@ class Akamai_Admin {
 				'<a href="%s">%s</a>',
 				admin_url( 'admin.php?page=' . $this->plugin_name ),
 				__( 'Settings', 'akamai' )
-			)
+			),
 		);
 
 		return array_merge( $settings_link, $links );
@@ -158,9 +155,8 @@ class Akamai_Admin {
 	 *
 	 * @since    0.1.0
 	 */
-
 	public function display_plugin_setup_page() {
-		include_once( 'partials/akamai-admin-display.php' );
+		include_once 'partials/akamai-admin-display.php';
 	}
 
 	public function options_update() {
@@ -173,9 +169,9 @@ class Akamai_Admin {
 		try {
 			$auth = \Akamai\Open\EdgeGrid\Authentication::createFromEdgeRcFile( $valid['section'], $valid['edgerc'] );
 
-			echo json_encode( array( "success" => true ) );
+			echo wp_json_encode( array( 'success' => true ) );
 		} catch ( \Akamai\Open\EdgeGrid\Authentication\Exception\ConfigException $e ) {
-			echo json_encode( array( "error" => $e->getMessage() ) );
+			echo wp_json_encode( array( 'error' => $e->getMessage() ) );
 		}
 
 		wp_die();
@@ -193,18 +189,18 @@ class Akamai_Admin {
 			'purge_archives'   => 1,
 		);
 
-		$akamai = new Akamai();
-		$hostname = $akamai->get_hostname($input);
-		if (!empty($hostname)) {
+		$akamai   = new Akamai();
+		$hostname = $akamai->get_hostname( $input );
+		if ( ! empty( $hostname ) ) {
 			$valid['hostname'] = $hostname;
 		} else {
-			add_settings_error( $this->plugin_name, 'hostname-error', 'Invalid hostname.');
+			add_settings_error( $this->plugin_name, 'hostname-error', 'Invalid hostname.' );
 		}
 
 		if ( isset( $input['edgerc'] ) && ! empty( $input['edgerc'] ) ) {
 			$path = $input['edgerc'];
-			if ( basename( $path ) != '.edgerc' ) {
-				if ( substr( $path, - 1 ) != DIRECTORY_SEPARATOR ) {
+			if ( basename( $path ) !== '.edgerc' ) {
+				if ( substr( $path, - 1 ) !== DIRECTORY_SEPARATOR ) {
 					$path .= DIRECTORY_SEPARATOR;
 				}
 				$path .= '.edgerc';
@@ -232,5 +228,4 @@ class Akamai_Admin {
 
 		return $valid;
 	}
-
 }

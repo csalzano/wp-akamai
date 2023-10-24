@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired during plugin activation
  *
@@ -34,5 +33,4 @@ class Akamai_Activator {
 	public static function activate() {
 		add_option( 'akamai-version', Akamai::VERSION );
 	}
-
 }

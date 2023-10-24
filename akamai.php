@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -33,14 +32,19 @@ if ( ! defined( 'AKAMAI_MIN_PHP' ) ) {
 }
 
 if ( version_compare( phpversion(), AKAMAI_MIN_PHP, '<' ) ) {
-	add_action( 'admin_notices', function () {
-		echo '<div class="notice notice-error">' .
-		     __( 'Error: "Akamai for WordPress" requires a newer version of PHP to be running.', 'akamai' ) .
-		     '<br/>' . __( 'Minimal version of PHP required: ',
-				'akamai' ) . '<strong>' . AKAMAI_MIN_PHP . '</strong>' .
-		     '<br/>' . __( 'Your server\'s PHP version: ', 'akamai' ) . '<strong>' . phpversion() . '</strong>' .
-		     '</div>';
-	} );
+	add_action(
+		'admin_notices',
+		function () {
+			echo '<div class="notice notice-error">' .
+			esc_html__( 'Error: "Akamai for WordPress" requires a newer version of PHP to be running.', 'akamai' ) .
+			'<br/>' . __(
+				'Minimal version of PHP required: ',
+				'akamai'
+			) . '<strong>' . AKAMAI_MIN_PHP . '</strong>' .
+			'<br/>' . __( 'Your server\'s PHP version: ', 'akamai' ) . '<strong>' . phpversion() . '</strong>' .
+			'</div>';
+		}
+	);
 
 	return false;
 }

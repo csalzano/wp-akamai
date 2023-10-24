@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired during plugin deactivation
  *
@@ -32,7 +31,5 @@ class Akamai_Deactivator {
 	 * @since    0.1.0
 	 */
 	public static function deactivate() {
-
 	}
-
 }

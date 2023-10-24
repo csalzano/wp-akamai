@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-//Grab all options
+// Grab all options.
 $options = get_option( $this->plugin_name );
 ?>
 
@@ -25,30 +25,39 @@ $options = get_option( $this->plugin_name );
 					<tr>
 						<th scope="row">
 							<label for="<?php echo esc_attr( $this->plugin_name ); ?>-edgerc">
-								<?php _e( '<code>.edgerc</code> file location', 'akamai' ); ?>
+								<?php
+								/* translators: 1. Opening <code> tag. 2. Closing </code> tag. */
+								printf( esc_html__( '%1$s.edgerc%2$s file location', 'akamai' ), '<code>', '</code>' );
+								?>
 							</label>
 						</th>
 						<td>
 							<input type="text" id="<?php echo esc_attr( $this->plugin_name ); ?>-edgerc"
 									name="<?php echo esc_attr( $this->plugin_name ); ?>[edgerc]" class="regular-text"
-									value="<?= ( isset( $options['edgerc'] ) ) ? esc_attr( $options['edgerc'] ) : ''; ?>"/>
+									value="<?php echo ( isset( $options['edgerc'] ) ) ? esc_attr( $options['edgerc'] ) : ''; ?>"/>
 							<br>
 							<?php
 							$paths = array();
 							if ( isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
-								$paths[] = $_SERVER['DOCUMENT_ROOT'];
+								$paths[] = sanitize_text_field( wp_unslash( $_SERVER['DOCUMENT_ROOT'] ) );
 							}
 							$paths[] = __( 'the current working directory', 'akamai' );
 							?>
-							<span class="description"><?php esc_html_e( 'By default, we\'ll look in ', 'akamai' );
+							<span class="description">
+							<?php
+							esc_html_e( 'By default, we\'ll look in ', 'akamai' );
 							echo implode( __( ' and ', 'akamai' ), $paths );
-							?>.</span>
+							?>
+							.</span>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="<?php echo esc_attr( $this->plugin_name ); ?>-section">
-								<?php _e( '<code>.edgerc</code> section', 'akamai' ); ?>
+								<?php
+								/* translators: 1. Opening <code> tag. 2. Closing </code> tag. */
+								printf( esc_html__( '%1$s.edgerc%2$s section', 'akamai' ), '<code>', '</code>' );
+								?>
 							</label>
 						</th>
 						<td>
@@ -57,11 +66,15 @@ $options = get_option( $this->plugin_name );
 									value="<?php echo esc_attr( ( isset( $options['section'] ) ) ? esc_attr( $options['section'] ) : 'default' ); ?>"
 									class="regular-text"/>
 							<br>
-							<span class="description"><?php printf(
+							<span class="description">
+							<?php
+							printf(
 								'%s <b>%s</b>.',
-								esc_html( 'The credentials must have access to the', 'akamai' ),
-								esc_html( 'CCU APIs', 'akamai' )
-							); ?></span>
+								esc_html__( 'The credentials must have access to the', 'akamai' ),
+								esc_html__( 'CCU APIs', 'akamai' )
+							);
+							?>
+							</span>
 						</td>
 					</tr>
 					</tbody>
@@ -74,25 +87,39 @@ $options = get_option( $this->plugin_name );
 						</th>
 						<td>
 							<ol class="how-to">
-								<li><?php printf( 
+								<li>
+								<?php
+								printf(
 									'%s <b>%s</b>.',
 									esc_html__( 'Login to', 'akamai' ),
 									esc_html__( 'Akamai Control Center', 'akamai' )
-								); ?></li>
-								<li><?php printf(
+								);
+								?>
+								</li>
+								<li>
+								<?php
+								printf(
 									'%s <b>%s</b> → <b>%s</b>.',
 									esc_html__( 'In the main menu, find', 'akamai' ),
 									esc_html__( 'Account Admin', 'akamai' ),
 									esc_html__( 'Identity and access', 'akamai' )
-								); ?></li>
-								<li><?php printf(
+								);
+								?>
+								</li>
+								<li>
+								<?php
+								printf(
 									'%s <b>%s</b> %s <b>%s</b>.',
 									esc_html__( 'Choose', 'akamai' ),
 									esc_html__( 'Create API Client', 'akamai' ),
 									esc_html__( 'under', 'akamai' ),
 									esc_html__( 'Users and API Clients', 'akamai' )
-								); ?></li>
-								<li><?php printf(
+								);
+								?>
+								</li>
+								<li>
+								<?php
+								printf(
 									'%s <b>%s</b> %s <b>%s</b> %s <b>%s</b>.',
 									esc_html__( 'Find the' ),
 									esc_html__( 'Select APIs' ),
@@ -100,13 +127,19 @@ $options = get_option( $this->plugin_name );
 									esc_html__( 'READ-WRITE', 'akamai' ),
 									esc_html__( 'for', 'akamai' ),
 									esc_html__( 'CCU APIs', 'akamai' )
-								); ?></li>
-								<li><?php printf(
+								);
+								?>
+								</li>
+								<li>
+								<?php
+								printf(
 									'%s <b>%s</b> %s.',
 									esc_html__( 'No selection needed under the', 'akamai' ),
 									esc_html__( 'Manage purge options', 'akamai' ),
 									esc_html__( 'button', 'akamai' )
-								); ?></li>
+								);
+								?>
+								</li>
 							</ol>
 							<p class="description"><?php esc_html_e( 'If you need help providing values for other fields like role/group, contact your Akamai account representative or consult', 'akamai' ); ?> <a href="https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials">https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials</a>.</p>
 						</td>
