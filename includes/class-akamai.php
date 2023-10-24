@@ -13,6 +13,8 @@
  * @subpackage Akamai/includes
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * The core plugin class.
  *
