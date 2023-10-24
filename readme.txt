@@ -2,7 +2,7 @@
 Contributors: dshafik, jasontremblay, salzano
 Tags: akamai, cache, purge, cdn
 Requires at least: 4.3
-Tested up to: 6.1.1
+Tested up to: 6.3.2
 Requires PHP: 5.3
 Stable tag: trunk
 License: Apache 2.0
