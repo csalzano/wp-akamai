@@ -71,7 +71,10 @@ In addition, there is a strictly enforced 50,000 byte limit on the size of each 
 * [Fixed] Prevent "Expect 100-continue header is not supported" errors
 * [Fixed] Fix file path when searching for .edgerc file in home directory
 * [Fixed] Fix missing admin menu icon
-* [Changed] Changes tested up to version number to 6.1.1
+* [Fixed] Formalizes the minimum PHP version of 5.3
+* [Fixed] Prevent errors when two copies of the plugin are activated at the same time
+* [Changed] Changes the dashboard menu from "Akamai for WordPress" to "Akamai"
+* [Changed] Changes tested up to version number to 6.3.2
 * [Changed] Updates screenshot
 
 = 0.6 =
@@ -91,6 +94,11 @@ In addition, there is a strictly enforced 50,000 byte limit on the size of each 
 
 = 0.1 =
 * Initial release
+
+== Upgrade Notice ==
+
+= 0.6.1 =
+Adds instructions to obtain credentials. Purge cached post when post is trashed. Purge cached post when comment is received. Purge cached post when comment status is changed. Prevent fatal errors when the Save Settings button is pressed. Prevent "Expect 100-continue header is not supported" errors. Fix file path when searching for .edgerc file in home directory. Fix missing admin menu icon. Formalizes the minimum PHP version of 5.3. Prevent errors when two copies of the plugin are activated at the same time. Changes the dashboard menu from "Akamai for WordPress" to "Akamai". Changes tested up to version number to 6.3.2. Updates screenshot.
 
 == References ==
 
