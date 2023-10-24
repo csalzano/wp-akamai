@@ -32,19 +32,6 @@ if ( ! defined( 'AKAMAI_MIN_PHP' ) ) {
 	define( 'AKAMAI_MIN_PHP', '5.3' );
 }
 
-if ( version_compare( phpversion(), AKAMAI_MIN_PHP, '<' ) ) {
-	add_action( 'admin_notices', function () {
-		echo '<div class="notice notice-error">' .
-		     __( 'Error: "Akamai for WordPress" requires a newer version of PHP to be running.', 'akamai' ) .
-		     '<br/>' . __( 'Minimal version of PHP required: ',
-				'akamai' ) . '<strong>' . AKAMAI_MIN_PHP . '</strong>' .
-		     '<br/>' . __( 'Your server\'s PHP version: ', 'akamai' ) . '<strong>' . phpversion() . '</strong>' .
-		     '</div>';
-	} );
-
-	return false;
-}
-
 if ( ! function_exists( 'activate_akamai' ) ) {
 	/**
 	 * The code that runs during plugin activation.
