@@ -10,7 +10,8 @@
 					var data = {
 						'action': 'akamai_verify_credentials',
 						'edgerc': $( '#akamai-edgerc' ).val(),
-						'section': $( '#akamai-section' ).val()
+						'section': $( '#akamai-section' ).val(),
+						'_ajax_nonce': akamai_plugin.nonce,
 					};
 
 					$.post(

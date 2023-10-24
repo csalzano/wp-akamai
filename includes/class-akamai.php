@@ -344,7 +344,8 @@ class Akamai {
 	public function add_error_query_arg( $location, $response ) {
 		remove_filter( 'redirect_post_location', array( $this, 'add_error_query_arg' ), 100 );
 
-		return add_query_arg( array( 'akamai-cache-purge-error' => rawurlencode( $response->detail ) ), $location );
+		$url = add_query_arg( array( 'akamai-cache-purge-error' => rawurlencode( $response->detail ) ), $location );
+		return wp_nonce_url( $url, 'akamai-cache-purge-error' );
 	}
 
 	/**
@@ -359,12 +360,21 @@ class Akamai {
 	}
 
 	public function admin_notices() {
+		if ( ! isset( $_GET['_wpnonce'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'akamai-cache-purge-error' )
+			|| ! isset( $_GET['akamai-cache-purge-error'] ) ) {
+			return;
+		}
+		$error = sanitize_text_field( wp_unslash( $_GET['akamai-cache-purge-error'] ) );
 		if ( isset( $_GET['akamai-cache-purge-error'] ) ) {
 			?>
 			<div class="error notice is-dismissible">
 				<p>
 					<img src="<?php echo Akamai_Admin::get_icon(); ?>" style="height: 1em" alt="Akamai for WordPress">
-					<?php esc_html_e( 'Unable to purge cache: ' . $_GET['akamai-cache-purge-error'], 'akamai' ); ?>
+					<?php
+					/* translators: 1. An error message. */
+					printf( esc_html__( 'Unable to purge cache: %s', 'akamai' ), $error );
+					?>
 				</p>
 			</div>
 			<?php

@@ -85,6 +85,15 @@ class Akamai_Admin {
 			$this->version,
 			false
 		);
+		wp_add_inline_script(
+			$this->plugin_name,
+			'const akamai_plugin = ' . wp_json_encode(
+				array(
+					'nonce' => wp_create_nonce( 'akamai_admin' ),
+				)
+			),
+			'before'
+		);
 	}
 
 	/**
@@ -164,6 +173,7 @@ class Akamai_Admin {
 	}
 
 	public function verify_credentials() {
+		check_ajax_referer( 'akamai_admin' );
 		$valid = $this->validate( $_POST );
 
 		try {
