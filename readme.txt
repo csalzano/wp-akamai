@@ -3,6 +3,7 @@ Contributors: dshafik
 Tags: akamai, cache, purge, cdn
 Requires at least: 4.3
 Tested up to: 4.9
+Requires PHP: 5.3
 Stable tag: trunk
 License: Apache 2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
