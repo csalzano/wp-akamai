@@ -2,7 +2,7 @@
     "name": "akamai-open/wp-akamai",
     "description": "Akamai Cache Purge",
     "type": "wordpress-plugin",
-    "license": "Apache-2.0",
+    "license": "GPLv3",
     "authors": [
         {
             "name": "Davey Shafik",

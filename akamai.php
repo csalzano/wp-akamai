@@ -19,8 +19,8 @@
  * Version:           0.6.1
  * Author:            Akamai Technologies
  * Author URI:        https://developer.akamai.com
- * License:           Apache-2.0
- * License URI:       http://www.apache.org/licenses/LICENSE-2.0.txt
+ * License:           GPLv3
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       akamai
  */
 
