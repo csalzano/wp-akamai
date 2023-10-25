@@ -111,7 +111,7 @@ class Akamai_Admin {
 		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
 		 */
 		add_menu_page(
-			'Akamai for WordPress',
+			'Akamai Cache Purge',
 			'Akamai',
 			'manage_options',
 			$this->plugin_name,

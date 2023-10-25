@@ -8,7 +8,7 @@ $options = get_option( $this->plugin_name );
 <div class="akamai-content">
 	<div class="akamai-frame">
 		<header>
-			<h1><?php esc_html_e( 'Akamai for WordPress', 'akamai' ); ?></h1>
+			<h1><?php esc_html_e( 'Akamai Cache Purge', 'akamai' ); ?></h1>
 		</header>
 
 		<?php settings_errors(); ?>

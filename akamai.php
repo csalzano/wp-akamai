@@ -13,9 +13,9 @@
  * @author            Davey Shafik <dshafik@akamai.com>
  *
  * @wordpress-plugin
- * Plugin Name:       Akamai for WordPress
+ * Plugin Name:       Akamai Cache Purge
  * Plugin URI:        http://github.com/akamai/wp-akamai
- * Description:       Akamai for WordPress Plugin. Control Akamai CDN and more.
+ * Description:       Integrates with Akamai to purge CDN cache when content is created, updated, or deleted.
  * Version:           0.6.1
  * Author:            Akamai Technologies
  * Author URI:        https://developer.akamai.com

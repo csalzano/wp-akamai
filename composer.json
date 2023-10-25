@@ -1,6 +1,6 @@
 {
     "name": "akamai-open/wp-akamai",
-    "description": "Akamai for WordPress Plugin",
+    "description": "Akamai Cache Purge",
     "type": "wordpress-plugin",
     "license": "Apache-2.0",
     "authors": [
